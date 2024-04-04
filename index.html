@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Color Game</title>
+</head>
+
+<body>
+
+    <div id="levels" class="content">
+        <button id="easy">easy</button>
+        <button id="medium">medium</button>
+        <button id="difficult">difficult</button>
+    </div>
+
+    <div id="easy-content" class="content" style="display: none;">
+        <div class="colorBigBox"></div>
+        <div class="answers">
+            <button class="red" data-color="red" style="background-color:red;"></button>
+            <button class="yellow" data-color="yellow" style="background-color:yellow;"></button>
+            <button class="green" data-color="green" style="background-color:green;"></button>
+            <button class="black" data-color="black" style="background-color:black;"></button>
+        </div>
+        <p id="score">Score: 0</p>
+        <p id="message"></p>
+        <button id="next">Next Level</button>
+
+    </div>
+    <div id="medium-content" class="content" style="display: none;">
+        <div class="colorBigBox"></div>
+        <div class="answers">
+            <button class="red" data-color="red" style="background-color:red;"></button>
+            <button class="yellow" data-color="yellow" style="background-color:yellow;"></button>
+            <button class="green" data-color="green" style="background-color:green;"></button>
+            <button class="black" data-color="black" style="background-color:black;"></button>
+            <button class="blue" data-color="blue" style="background-color:blue;"></button>
+            <button class="purple" data-color="purple" style="background-color:purple;"></button>
+        </div>
+        <p id="score">Score: 0</p>
+        <p id="message"></p>
+        <button id="next">Next Level</button>
+    </div>
+
+    <div id="difficult-content" class="content" style="display: none;">
+        <div class="colorBigBox"></div>
+        <div class="answers">
+            <button class="red" data-color="red" style="background-color:red;"></button>
+            <button class="yellow" data-color="yellow" style="background-color:yellow;"></button>
+            <button class="green" data-color="green" style="background-color:green;"></button>
+            <button class="black" data-color="black" style="background-color:black;"></button>
+            <button class="blue" data-color="blue" style="background-color:blue;"></button>
+            <button class="purple" data-color="purple" style="background-color:purple;"></button>
+            <button class="orange" data-color="orange" style="background-color:orange;"></button>
+            <button class="cyan" data-color="cyan" style="background-color:cyan;"></button>
+            <button class="magenta" data-color="magenta" style="background-color:magenta;"></button>
+            <button class="pink" data-color="pink" style="background-color:pink;"></button>
+        </div>
+        <p id="score">Score: 0</p>
+        <p id="message"></p>
+        <button id="next">Next</button>
+    </div>
+    <div></div>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>

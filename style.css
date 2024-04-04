@@ -1,0 +1,46 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.levels {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 10%;
+}
+
+button {
+  background-color: blue;
+  padding: 30px 100px;
+  border-radius: 5px;
+  border: none;
+  color: rgb(149, 219, 232);
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.colorBigBox {
+  width: 300px;
+  height: 300px;
+  /* background-color: aqua; */
+  margin: auto;
+  margin-bottom: auto;
+  margin-bottom: 30px;
+}
+.answers {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 600px) {
+  .answers button {
+    padding: 15px 50px;
+  }
+}
