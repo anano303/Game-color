@@ -21,12 +21,6 @@ function startGame(level) {
   if (level === "easy") {
     colorNames = ["red", "yellow", "green", "black"];
     colorBigBoxSelector = "#easy-content .colorBigBox";
-    timer = setTimeout(function () {
-      alert("შენ დამარცხდი! დრო ამოიწურა");
-      score = 0;
-      document.querySelector(`#${level}-content .score`).textContent =
-        "Score: " + score;
-    }, 20000);
   } else if (level === "medium") {
     colorNames = ["red", "yellow", "green", "black", "blue", "purple"];
     colorBigBoxSelector = "#medium-content .colorBigBox";
@@ -99,7 +93,7 @@ function startGame(level) {
         colorBigBox.style.backgroundColor = targetColor;
 
         timer = setTimeout(function () {
-          alert("You lost! Time's up!");
+          alert("შენ დამარცხდი! დრო ამოიწურა");
           score = 0;
           scoreDisplay.textContent = "Score: " + score;
         }, levelTimes[level]);
