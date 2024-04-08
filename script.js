@@ -3,9 +3,9 @@ let level;
 
 let timer;
 const levelTimes = {
-  easy: 2000,
-  medium: 3000,
-  difficult: 5000,
+  easy: 1500,
+  medium: 2000,
+  difficult: 3000,
 };
 
 function hideAllContent() {
