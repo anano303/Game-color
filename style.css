@@ -65,6 +65,10 @@ p {
 
 @media screen and (max-width: 600px) {
   .answers button {
-    padding: 15px 50px;
+    width: 70px;
+  }
+  .colorBigBox {
+    width: 200px;
+    height: 200px;
   }
 }
