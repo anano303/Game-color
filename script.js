@@ -1,6 +1,13 @@
 let score = 0;
 let level;
 
+let timer;
+const levelTimes = {
+  easy: 3000,
+  medium: 5000,
+  difficult: 8000,
+};
+
 function hideAllContent() {
   let contentDivs = document.querySelectorAll(".content");
   contentDivs.forEach(function (div) {
@@ -9,10 +16,17 @@ function hideAllContent() {
 }
 
 function startGame(level) {
+  clearTimeout(timer);
   let colorNames, colorBigBoxSelector;
   if (level === "easy") {
     colorNames = ["red", "yellow", "green", "black"];
     colorBigBoxSelector = "#easy-content .colorBigBox";
+    timer = setTimeout(function () {
+      alert("შენ დამარცხდი! დრო ამოიწურა");
+      score = 0;
+      document.querySelector(`#${level}-content .score`).textContent =
+        "Score: " + score;
+    }, 20000);
   } else if (level === "medium") {
     colorNames = ["red", "yellow", "green", "black", "blue", "purple"];
     colorBigBoxSelector = "#medium-content .colorBigBox";
@@ -51,6 +65,7 @@ function startGame(level) {
   );
   answerButtons.forEach(function (button) {
     button.addEventListener("click", function () {
+      clearTimeout(timer);
       let chosenColor = this.dataset.color;
       if (chosenColor === targetColor) {
         score++;
@@ -82,12 +97,19 @@ function startGame(level) {
         colorIndex = Math.floor(Math.random() * colorNames.length);
         targetColor = colorNames[colorIndex];
         colorBigBox.style.backgroundColor = targetColor;
+
+        timer = setTimeout(function () {
+          alert("You lost! Time's up!");
+          score = 0;
+          scoreDisplay.textContent = "Score: " + score;
+        }, levelTimes[level]);
       }
     });
   });
 
   let nextButton = document.querySelector(`#${level}-content .next`);
   nextButton.addEventListener("click", function () {
+    clearTimeout(timer);
     if (
       (level === "easy" && score >= 4) ||
       (level === "medium" && score >= 8) ||
