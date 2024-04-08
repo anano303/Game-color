@@ -1,26 +1,49 @@
 body {
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(
+    to bottom,
+    #000000 0%,
+    #1a1a1a 25%,
+    #333333 50%,
+    #4d4d4d 75%,
+    #666666 100%
+  );
 }
 
 .levels {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   gap: 30px;
   margin-top: 10%;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 button {
   background-color: blue;
-  padding: 30px 100px;
+  width: 190px;
+  height: 60px;
   border-radius: 5px;
   border: none;
   color: rgb(149, 219, 232);
   text-transform: uppercase;
   font-weight: bold;
   cursor: pointer;
+  margin: 5px;
+  box-shadow: 5px 3px rgb(1, 52, 89);
+}
+p {
+  color: blueviolet;
+  margin-left: 10px;
+  font-weight: bold;
 }
 
 .colorBigBox {

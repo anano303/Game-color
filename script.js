@@ -1,19 +1,6 @@
-document.getElementById("easy").addEventListener("click", function () {
-  hideAllContent(); // ყველა დივის დამალვა
-  document.getElementById("easy-content").style.display = "block"; // გამოვაჩინო დონე რომელსაც ირჩევს
-  startGame("easy");
-});
-document.getElementById("medium").addEventListener("click", function () {
-  hideAllContent();
-  document.getElementById("medium-content").style.display = "block";
-  startGame("medium");
-});
+let score = 0;
+let level;
 
-document.getElementById("difficult").addEventListener("click", function () {
-  hideAllContent();
-  document.getElementById("difficult-content").style.display = "block";
-  startGame("difficult");
-});
 function hideAllContent() {
   let contentDivs = document.querySelectorAll(".content");
   contentDivs.forEach(function (div) {
@@ -22,9 +9,7 @@ function hideAllContent() {
 }
 
 function startGame(level) {
-  let colorNames;
-  let colorBigBoxSelector;
-
+  let colorNames, colorBigBoxSelector;
   if (level === "easy") {
     colorNames = ["red", "yellow", "green", "black"];
     colorBigBoxSelector = "#easy-content .colorBigBox";
@@ -42,33 +27,28 @@ function startGame(level) {
       "orange",
       "cyan",
       "magenta",
-      "brown",
+      "pink",
     ];
     colorBigBoxSelector = "#difficult-content .colorBigBox";
   }
 
-  console.log("colorBigBoxSelector:", colorBigBoxSelector);
-
   let colorIndex = Math.floor(Math.random() * colorNames.length);
   let targetColor = colorNames[colorIndex];
   let colorBigBox = document.querySelector(colorBigBoxSelector);
-
-  console.log("colorBigBox:", colorBigBox);
-
   if (colorBigBox) {
     colorBigBox.style.backgroundColor = targetColor;
-    console.log("Target color:", targetColor);
   } else {
     console.error("Failed to select colorBigBox");
   }
 
-  let score = 0;
-  let scoreDisplay = document.getElementById("score");
-  scoreDisplay.textContent = "Score: " + score;
+  let scoreDisplay = document.querySelector(`#${level}-content .score`);
+  let messageDisplay = document
+    .getElementById(`${level}-content`)
+    .querySelector("#message");
 
-  let messageDisplay = document.getElementById("message");
-
-  let answerButtons = document.querySelectorAll(".answers button");
+  let answerButtons = document.querySelectorAll(
+    `#${level}-content .answers button`
+  );
   answerButtons.forEach(function (button) {
     button.addEventListener("click", function () {
       let chosenColor = this.dataset.color;
@@ -81,18 +61,24 @@ function startGame(level) {
       }
       scoreDisplay.textContent = "Score: " + score;
 
-      // შევამოწმოთ მოიგო თუ წააგო
-      if (score >= 4) {
-        messageDisplay.textContent = "Congratulations! You won!";
-        score = 0;
+      if (
+        (level === "easy" && score >= 4) ||
+        (level === "medium" && score >= 8) ||
+        (level === "difficult" && score >= 11)
+      ) {
+        messageDisplay.textContent =
+          "გილოცავ, მოიგე! შეგიძლია გადახვიდე შემდეგ ეტაპზე";
+        // score = 0;
         scoreDisplay.textContent = "Score: " + score;
-      }
-      if (score <= -4) {
+      } else if (
+        (level === "easy" && score <= -4) ||
+        (level === "medium" && score <= -8) ||
+        (level === "difficult" && score <= -11)
+      ) {
         messageDisplay.textContent = "სამწუხაროდ დამარცხი, კიდევ სცადე ";
         score = 0;
         scoreDisplay.textContent = "Score: " + score;
       } else {
-        // გააგრძელოს ახალი ფერების გამოჩენა
         colorIndex = Math.floor(Math.random() * colorNames.length);
         targetColor = colorNames[colorIndex];
         colorBigBox.style.backgroundColor = targetColor;
@@ -100,16 +86,64 @@ function startGame(level) {
     });
   });
 
-  // Add event listener to the "Next" button
-  //   let nextButton = document.getElementById("next");
-  //   nextButton.addEventListener("click", function () {
-  //     // Move to the next level
-  //     levelIndex = (levelIndex + 1) % colorLevels.length;
-  //     colorNames = colorLevels[levelIndex]; // Update color names for the next level
-  //     // Generate new target color
-  //     colorIndex = Math.floor(Math.random() * colorNames.length);
-  //     targetColor = colorNames[colorIndex];
-  //     colorBigBox.style.backgroundColor = targetColor;
-  //     messageDisplay.textContent = ""; // Clear any previous messages
-  //   });
+  let nextButton = document.querySelector(`#${level}-content .next`);
+  nextButton.addEventListener("click", function () {
+    if (
+      (level === "easy" && score >= 4) ||
+      (level === "medium" && score >= 8) ||
+      (level === "difficult" && score >= 11)
+    ) {
+      let nextLevel;
+      score = 0;
+      if (level === "easy") {
+        nextLevel = "medium";
+      } else if (level === "medium") {
+        nextLevel = "difficult";
+      } else {
+        alert("შენ უკვე დახურე თამაში!");
+        return;
+      }
+
+      hideAllContent();
+
+      let nextLevelContent = document.getElementById(`${nextLevel}-content`);
+      if (nextLevelContent) {
+        nextLevelContent.style.display = "block";
+        startGame(nextLevel);
+      } else {
+        console.error("Next level content not found!");
+      }
+    } else {
+      alert(
+        "ჯერ არ მოგიგია , შემდეგ ეტაპზე გადასვლას შეძლებ ამ ეტაპის დახურვის შემდეგ"
+      );
+    }
+  });
 }
+
+document.getElementById("easy").addEventListener("click", function () {
+  hideAllContent();
+  document.getElementById("easy-content").style.display = "block";
+  startGame("easy");
+  level = "easy";
+});
+
+document.getElementById("medium").addEventListener("click", function () {
+  hideAllContent();
+  document.getElementById("medium-content").style.display = "block";
+  startGame("medium");
+  level = "medium";
+});
+
+document.getElementById("difficult").addEventListener("click", function () {
+  hideAllContent();
+  document.getElementById("difficult-content").style.display = "block";
+  startGame("difficult");
+  level = "difficult";
+});
+
+document.querySelectorAll(".new-game").forEach((button) => {
+  button.addEventListener("click", function () {
+    location.reload();
+  });
+});
